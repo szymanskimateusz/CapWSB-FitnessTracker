@@ -101,7 +101,7 @@ class UserApiIntegrationTest extends IntegrationTestBase {
         User user2 = existingUser(generateUserWithDate(LocalDate.of(2024, 8, 11)));
 
 
-        mockMvc.perform(get("/v1/users/older/{time}", LocalDate.of(2024, 8, 10)).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/users/older-than/{time}", LocalDate.of(2024, 8, 10)).contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
