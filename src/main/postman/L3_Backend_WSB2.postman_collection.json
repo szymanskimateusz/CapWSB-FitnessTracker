@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "8ccf582e-d486-4406-a40b-adffb76f4a96",
+		"name": "Backend_WSB2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39171887"
+	},
+	"item": [
+		{
+			"name": "allTrainings",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "trainingByUserId",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "findAfterTime",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "activityType",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "createTraining",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": {\r\n            \"id\": 1,\r\n            \"firstName\": \"Emma\",\r\n            \"lastName\": \"Johnson\",\r\n            \"birthdate\": \"1996-11-19\",\r\n            \"email\": \"Emma.Johnson@domain.com\"\r\n        },\r\n    \"startTime\": \"2024-11-12 21:04:00\",\r\n    \"endTime\": \"2024-11-13 21:04:00\",\r\n    \"activityType\": \"TENNIS\",\r\n    \"distance\": 23,\r\n    \"averageSpeed\": 19\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1/trainings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"trainings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateTraining",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distance\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1/trainings/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"trainings",
+						"11"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
