@@ -4,7 +4,7 @@ package com.capgemini.wsb.fitnesstracker.training.internal;
 public enum ActivityType {
 
     RUNNING("Running"),
-    CYCLING("Cycling"),
+    CYCLING("CYCLING"),
     WALKING("Walking"),
     SWIMMING("Swimming"),
     TENNIS("Tenis");

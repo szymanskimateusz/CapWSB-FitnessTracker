@@ -14,11 +14,9 @@ import java.util.Date;
  */
 public class TrainingDto{
     public Long id;
-    //public Long userId;
-    public User user;
+    public UserDto user;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     public Date startTime;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     public Date endTime;
     public ActivityType activityType;

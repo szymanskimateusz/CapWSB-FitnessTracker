@@ -26,10 +26,10 @@ public class TrainingMapper {
     public TrainingDto toDto(Training training) {
        var dto = new TrainingDto();
        dto.id = training.getId();
-       dto.user = training.getUser();
-//       dto.userId = training.getUser().getId();
+       dto.user = userMapper.toDto(training.getUser());
        dto.startTime = training.getStartTime();
        dto.endTime = training.getEndTime();
+       dto.activityType = training.getActivityType();
        dto.distance = training.getDistance();
        dto.averageSpeed = training.getAverageSpeed();
        return dto;

@@ -1,5 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
+import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
 import com.capgemini.wsb.fitnesstracker.training.api.*;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
@@ -64,7 +65,7 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
 
     @Override
     public TrainingDto createTraining(TrainingDto trainingDto) {
-        User user = userRepository.findById(trainingDto.user.getId()).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(trainingDto.user.id()).orElseThrow(() -> new NotFoundException("User not found"));
 
         Training training = new Training(
                 user,
@@ -73,18 +74,19 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
                 trainingDto.activityType,
                 trainingDto.distance,
                 trainingDto.averageSpeed
-
         );
 
         trainingRepository.save(training);
+
         return trainingMapper.toDto(training);
     }
 
     @Override
-    public TrainingDto updateTraining(TrainingDto trainingDto) {
-        Training existingTraining = trainingRepository.findById(trainingDto.id).orElseThrow(()->new TrainingNotFoundException("Training not found"));
-        existingTraining.setDistance(trainingDto.distance);
-        trainingRepository.save(existingTraining);
+    public TrainingDto updateTraining(Long trainingId, TrainingUpdateDto trainingUpdateDto) {
+        Training existingTraining = trainingRepository.findById(trainingUpdateDto.getId()).orElseThrow(()->new TrainingNotFoundException("Training not found"));
+        if (trainingUpdateDto.getDistance() != 0)
+            existingTraining.setDistance(trainingUpdateDto.getDistance());
+
         return trainingMapper.toDto(existingTraining);
     }
 

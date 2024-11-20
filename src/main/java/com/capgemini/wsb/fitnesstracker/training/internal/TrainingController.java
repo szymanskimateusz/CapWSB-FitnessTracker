@@ -3,9 +3,13 @@ package com.capgemini.wsb.fitnesstracker.training.internal;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingDto;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingService;
+import com.capgemini.wsb.fitnesstracker.training.api.TrainingUpdateDto;
+import com.capgemini.wsb.fitnesstracker.user.internal.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +27,8 @@ public class TrainingController {
 
     private final TrainingService trainingService;
     private final TrainingProvider trainingProvider;
+    @Autowired
+    private final UserRepository userRepository;
 
     /**
      * Get all trainings.
@@ -48,7 +54,7 @@ public class TrainingController {
      * @param afterTime Date after which finished trainings are to be retrieved.
      */
     @GetMapping("/finished/{afterTime}")
-    public ResponseEntity<List<TrainingDto>> getFinishedTrainingsAfter(@PathVariable Date afterTime) {
+    public ResponseEntity<List<TrainingDto>> getFinishedTrainingsAfter(@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date afterTime) {
         List<TrainingDto> trainings = trainingProvider.findFinishedTrainingsAfter(afterTime);
         return ResponseEntity.ok(trainings);
     }
@@ -76,18 +82,19 @@ public class TrainingController {
     /**
      * Update an existing training by ID.
      * @param trainingId ID of the training to update.
-     * @param trainingDto Updated training data.
+     * @param trainingUpdateDto Updated training data.
      */
     @PutMapping("/{trainingId}")
-    public ResponseEntity<TrainingDto> updateTraining(@PathVariable Long trainingId, @RequestBody TrainingDto trainingDto) {
-        TrainingDto updatedTraining = trainingService.updateTraining(trainingDto);
+    public ResponseEntity<TrainingDto> updateTraining(@PathVariable Long trainingId, @RequestBody TrainingUpdateDto trainingUpdateDto) {
+        trainingUpdateDto.setId(trainingId);
+        TrainingDto updatedTraining = trainingService.updateTraining(trainingId, trainingUpdateDto);
         return ResponseEntity.ok(updatedTraining);
     }
 
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllExceptions(Exception ex) {
-        logger.error("Error occurred", ex); // Logs the stack trace
+        logger.error("Error occurred", ex);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", ex.getMessage()));
     }
 }
