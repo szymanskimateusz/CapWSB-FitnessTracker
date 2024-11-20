@@ -80,9 +80,10 @@ public class TrainingController {
     }
 
     /**
-     * Update an existing training by ID.
-     * @param trainingId ID of the training to update.
-     * @param trainingUpdateDto Updated training data.
+     * Handles HTTP PUT requests to update an existing training by its ID.
+     * @param trainingId the ID of the training to update.
+     * @param trainingUpdateDto the data for updating the training.
+     * @return a ResponseEntity containing the updated TrainingDto object.
      */
     @PutMapping("/{trainingId}")
     public ResponseEntity<TrainingDto> updateTraining(@PathVariable Long trainingId, @RequestBody TrainingUpdateDto trainingUpdateDto) {
@@ -91,7 +92,12 @@ public class TrainingController {
         return ResponseEntity.ok(updatedTraining);
     }
 
-
+    /**
+     * Handles all exceptions that are not specifically caught by other exception handlers.
+     * Logs the error and returns a standardized error response.
+     * @param ex the exception that was thrown.
+     * @return a ResponseEntity containing an error message and HTTP BAD_REQUEST status.
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllExceptions(Exception ex) {
         logger.error("Error occurred", ex);
