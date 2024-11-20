@@ -11,7 +11,7 @@ import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
  */
 
 @Component
-class UserMapper {
+public class UserMapper {
 
     /**
      * Converts a User entity to a UserDto.
@@ -20,7 +20,7 @@ class UserMapper {
      * @return a UserDto containing the user's details.
      */
 
-    UserDto toDto(User user) {
+    public UserDto toDto(User user) {
         return new UserDto(user.getId(),
                            user.getFirstName(),
                            user.getLastName(),
@@ -35,7 +35,7 @@ class UserMapper {
      * @return a User entity based on the provided UserDto.
      */
 
-    User toEntity(UserDto userDto) {
+    public User toEntity(UserDto userDto) {
         return new User(
                         userDto.firstName(),
                         userDto.lastName(),

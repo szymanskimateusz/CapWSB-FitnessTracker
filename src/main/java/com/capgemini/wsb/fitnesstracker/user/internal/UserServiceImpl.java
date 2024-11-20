@@ -86,7 +86,7 @@ class UserServiceImpl implements UserService, UserProvider {
 
     @Override
     public Optional<User> getUser(final Long userId) {
-        return userRepository.findById(userId);
+        return userRepository.findById(userId).stream().findFirst();
     }
 
     /**
