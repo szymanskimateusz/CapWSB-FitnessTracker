@@ -26,7 +26,7 @@ public class Statistics {
     @Column(name = "total_distance")
     private double totalDistance;
 
-    @Column(name = "total_calories_burned")
-    private int totalCaloriesBurned;
+    @Column(name = "total_average_speed")
+    private double totalAverageSpeed;
 
 }

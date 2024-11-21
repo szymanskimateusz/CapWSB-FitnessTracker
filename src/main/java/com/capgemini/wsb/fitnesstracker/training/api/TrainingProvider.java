@@ -1,6 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.training.api;
 
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
+import com.capgemini.wsb.fitnesstracker.user.api.User;
 
 import java.util.Date;
 import java.util.List;
@@ -47,6 +48,5 @@ public interface TrainingProvider {
      * @return A list of {@link TrainingDto} containing trainings associated with the given user
      */
     List<TrainingDto> findTrainingsByUserId(Long userId);
-
 
 }

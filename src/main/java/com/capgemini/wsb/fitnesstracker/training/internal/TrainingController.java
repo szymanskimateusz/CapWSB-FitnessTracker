@@ -22,7 +22,6 @@ import java.util.Map;
 @RequestMapping("/v1/trainings")
 @RequiredArgsConstructor
 public class TrainingController {
-
     private static final Logger logger = LoggerFactory.getLogger(TrainingController.class);
 
     private final TrainingService trainingService;

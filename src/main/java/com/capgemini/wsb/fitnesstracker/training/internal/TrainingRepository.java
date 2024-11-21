@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * Repository interface for Training entity.
  */
-interface TrainingRepository extends JpaRepository<Training, Long> {
+public interface TrainingRepository extends JpaRepository<Training, Long> {
     /**
      * Finds all trainings by a specific activity type.
      *
@@ -35,4 +35,25 @@ interface TrainingRepository extends JpaRepository<Training, Long> {
      * @return list of trainings for the specified user.
      */
     List<Training> findAllByUserId(Long userId);
+
+
+    /**
+     * Finds trainings for a specific user within a date range.
+     *
+     * @param user the user whose trainings are to be fetched
+     * @param startTime the start time of the date range
+     * @param endTime the end time of the date range
+     * @return A list of trainings
+     */
+    List<Training> findByUserAndStartTimeBetween(User user, Date startTime, Date endTime);
+
+    /**
+     * Finds all trainings for a given user in the last month.
+     *
+     * @param userId the user's id
+     * @param startOfMonth the start date of the last month
+     * @param endOfMonth the end date of the last month
+     * @return a list of trainings in the last month
+     */
+    List<Training> findAllByUserIdAndStartTimeBetween(Long userId, Date startOfMonth, Date endOfMonth);
 }
